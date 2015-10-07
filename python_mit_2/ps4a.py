@@ -13,7 +13,7 @@ SCRABBLE_LETTER_VALUES = {
 # Helper code
 # (you don't need to understand this helper code)
 
-WORDLIST_FILENAME = "c:/users/mflores1/PycharmProjects/PracticePython/python_mit/words.txt"
+WORDLIST_FILENAME = "c:/users/mflores1/datafiles/python_mit_2/words.txt"
 
 def loadWords():
     """
