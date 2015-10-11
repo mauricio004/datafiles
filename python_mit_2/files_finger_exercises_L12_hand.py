@@ -83,17 +83,36 @@ class Hand(object):
         word: string
         returns: Boolean (if the word was or was not made)
         """
-        # Your code here
-        raise NotImplementedError()
+        # Create a dictionary type of word
+        word_dict = {}
+        for c in word:
+            word_dict[c] = word_dict.get(c, 0) + 1
 
-    
+        # Compare word with hand
+        test = True
+        for k in word_dict.keys():
+            if k in self.hand:
+                if not word_dict[k] <= self.hand[k]:
+                    test = False
+            else:
+                test = False
+        # Remove letters from hand
+        if test:
+            for c in word:
+                self.hand[c] -= 1
+
+        if test:
+            return True
+        return False
+
+
 myHand = Hand(7)
 print myHand
 print myHand.calculateLen()
 
 myHand.setDummyHand('aazzmsp')
-print myHand
+print myHand.hand
 print myHand.calculateLen()
 
-myHand.update('za')
+myHand.update('aazz')
 print myHand

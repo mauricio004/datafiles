@@ -35,6 +35,22 @@ def primesList(N):
     p.sort()
     return p
 
+def genPrimes():
+    """
+    N: an integer
+    """
+    # Your code here
+    x = 2
+
+    while True:
+        next = x
+        yield next
+        x += 1
+        if x % 2 == 1:
+            for k in range(2, x):
+                if not x % k == 0:
+                    next = x
+
 
 def runprimeList(N, primesList):
     print(primesList(N))
@@ -129,10 +145,15 @@ def main():
     # N = 185
     # runprimeList(N, primesList)
 
+    foo = genPrimes()
+    print(foo.next())
+    print(foo.next())
+    print(foo.next())
+
+
+
     # print(factR(5))
-    print(count7(4581))
-
-
+    # print(count7(4581))
 
     # Problem #7
     # d = {'a': 21, 'b': 20, 'c': 21, 'd': 3, 'e': 26}
