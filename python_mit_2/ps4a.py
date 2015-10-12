@@ -13,7 +13,7 @@ SCRABBLE_LETTER_VALUES = {
 # Helper code
 # (you don't need to understand this helper code)
 
-WORDLIST_FILENAME = "c:/users/mflores1/datafiles/python_mit_2/words.txt"
+WORDLIST_FILENAME = "c:/users/mflores1/datafiles/python_mit_2/words_v1.txt"
 
 def loadWords():
     """
@@ -97,7 +97,7 @@ def displayHand(hand):
     """
     for letter in hand.keys():
         for j in range(hand[letter]):
-             print(letter, end=" ")              # print all on the same line
+             print(letter)              # print all on the same line
     print()                                      # print an empty line
 
 #
@@ -238,7 +238,7 @@ def playHand(hand, wordList, n):
     # As long as there are still letters left in the hand:
     while calculateHandlen(hand) > 0:
         # Display the hand
-        print("Current hand: ", end="")
+        print("Current hand: ")
         displayHand(hand)
         # Ask user for input ****Need to change input*********
         user_word = input("Enter word, or a \".\" to indicate that you are finished: ")
@@ -320,6 +320,6 @@ def main():
     # displayHand({'h':1, 'i':1, 'c':1, 'z':1, 'm':2, 'a':1})
     # playHand({'h': 2, 'i': 1, 'c': 2, 'z':1, 'm':2, 'a':2}, wordList, 10)
     # playHand({'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}, wordList, 7)
-    playGame(wordList)
+    #playGame(wordList)
 if __name__ == '__main__':
     main()

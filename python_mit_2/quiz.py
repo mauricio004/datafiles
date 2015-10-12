@@ -40,16 +40,22 @@ def genPrimes():
     N: an integer
     """
     # Your code here
+    # Your code here
     x = 2
-
+    p = []
     while True:
-        next = x
-        yield next
+        test = True
+        if x == 2:
+            p.append(x)
+            yield x
+        elif x % 2 == 1:
+            for k in p:
+                if x % k == 0:
+                    test = False
+            if test is True:
+                p.append(x)
+                yield x
         x += 1
-        if x % 2 == 1:
-            for k in range(2, x):
-                if not x % k == 0:
-                    next = x
 
 
 def runprimeList(N, primesList):
@@ -138,14 +144,21 @@ def main():
     # print(twoQuadratics(-1, -0.24, 5, 0, 1, 3, 5, 0))
 
     # Problem 5
-    # N = 4
-    # runprimeList(N, primesList)
+    #N = 4
+    #runprimeList(N, primesList)
     # N = 19
     # runprimeList(N, primesList)
     # N = 185
     # runprimeList(N, primesList)
 
     foo = genPrimes()
+    print(foo.next())
+    print(foo.next())
+    print(foo.next())
+    print(foo.next())
+    print(foo.next())
+    print(foo.next())
+    print(foo.next())
     print(foo.next())
     print(foo.next())
     print(foo.next())

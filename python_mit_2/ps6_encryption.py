@@ -5,7 +5,7 @@
 import string
 import random
 
-WORDLIST_FILENAME = "words.txt"
+WORDLIST_FILENAME = "c:/users/mflores1/datafiles/python_mit_2/words.txt"
 
 # -----------------------------------
 # Helper code
@@ -23,6 +23,7 @@ def loadWords():
     print "  ", len(wordList), "words loaded."
     return wordList
 
+
 def isWord(wordList, word):
     """
     Determines if word is a valid word.
@@ -32,14 +33,15 @@ def isWord(wordList, word):
     returns True if word is in wordList.
 
     Example:
-    >>> isWord(wordList, 'bat') returns
+    #>>> isWord(wordList, 'bat') returns
     True
-    >>> isWord(wordList, 'asdf') returns
+    #>>> isWord(wordList, 'asdf') returns
     False
     """
     word = word.lower()
     word = word.strip(" !@#$%^&*()-_+={}[]|\\:;'<>?,./\"")
     return word in wordList
+
 
 def randomWord(wordList):
     """
@@ -50,6 +52,7 @@ def randomWord(wordList):
     """
     return random.choice(wordList)
 
+
 def randomString(wordList, n):
     """
     Returns a string containing n random words from wordList
@@ -58,6 +61,7 @@ def randomString(wordList, n):
     returns: a string of random words separated by spaces.
     """
     return " ".join([randomWord(wordList) for _ in range(n)])
+
 
 def randomScrambled(wordList, n):
     """
@@ -73,8 +77,9 @@ def randomScrambled(wordList, n):
     implementation of applyShifts!
     """
     s = randomString(wordList, n) + " "
-    shifts = [(i, random.randint(0, 25)) for i in range(len(s)) if s[i-1] == ' ']
+    shifts = [(i, random.randint(0, 25)) for i in range(len(s)) if s[i - 1] == ' ']
     return applyShifts(s, shifts)[:-1]
+
 
 def getStoryString():
     """
@@ -99,8 +104,30 @@ def buildCoder(shift):
     shift: 0 <= int < 26
     returns: dict
     """
-    ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+    # Create dictionary & add lower case letters
+    alpha_lc = string.ascii_lowercase
+    alpha_dict = {}
+    for lc in alpha_lc:
+        index_key = alpha_lc.index(lc)
+        index_value = index_key + shift
+        if index_value < 26:
+            alpha_dict[lc] = alpha_lc[index_value]
+        elif 26 <= index_value <= 50:
+            index_value -= 26
+            alpha_dict[lc] = alpha_lc[index_value]
+
+    # add upper case letters
+    alpha_uc = string.ascii_uppercase
+    for uc in alpha_uc:
+        index_key = alpha_uc.index(uc)
+        index_value = index_key + shift
+        if index_value < 26:
+            alpha_dict[uc] = alpha_uc[index_value]
+        elif 26 <= index_value <= 50:
+            index_value -= 26
+            alpha_dict[uc] = alpha_uc[index_value]
+
+    return alpha_dict
 
 def applyCoder(text, coder):
     """
@@ -110,8 +137,10 @@ def applyCoder(text, coder):
     coder: dict with mappings of characters to shifted characters
     returns: text after mapping coder chars to original text
     """
-    ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+    encodedtext = ""
+    for c in text:
+        encodedtext += coder.get(c, c)
+    return encodedtext
 
 def applyShift(text, shift):
     """
@@ -124,10 +153,8 @@ def applyShift(text, shift):
     shift: amount to shift the text (0 <= int < 26)
     returns: text after being shifted by specified amount.
     """
-    ### TODO.
     ### HINT: This is a wrapper function.
-    return "Not yet implemented." # Remove this comment when you code the function
-
+    return applyCoder(text, buildCoder(shift))
 #
 # Problem 2: Decryption
 #
@@ -139,7 +166,8 @@ def findBestShift(wordList, text):
     returns: 0 <= int < 26
     """
     ### TODO
-    return "Not yet implemented." # Remove this comment when you code the function
+    return "Not yet implemented."  # Remove this comment when you code the function
+
 
 def decryptStory():
     """
@@ -151,17 +179,23 @@ def decryptStory():
     returns: string - story in plain text
     """
     ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+    return "Not yet implemented."  # Remove this comment when you code the function
+
 
 #
 # Build data structures used for entire session and run encryption
 #
 
-if __name__ == '__main__':
+def main():
+    applyShift('This is a test.', 8)
     # To test findBestShift:
-    wordList = loadWords()
-    s = applyShift('Hello, world!', 8)
-    bestShift = findBestShift(wordList, s)
-    assert applyShift(s, bestShift) == 'Hello, world!'
+    #wordList = loadWords()
+    #s = applyShift('Hello, world!', 8)
+    #bestShift = findBestShift(wordList, s)
+    #assert applyShift(s, bestShift) == 'Hello, world!'
     # To test decryptStory, comment the above four lines and uncomment this line:
     #    decryptStory()
+
+
+if __name__ == '__main__':
+    main()
