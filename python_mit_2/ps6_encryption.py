@@ -69,7 +69,7 @@ def randomScrambled(wordList, n):
     and encrypting it with a sequence of random shifts.
 
     wordList: list of words
-    n: number of random words to generate and scamble
+    n: number of random words to generate and scramble
     returns: a scrambled string of n random words
 
     NOTE:
@@ -78,7 +78,7 @@ def randomScrambled(wordList, n):
     """
     s = randomString(wordList, n) + " "
     shifts = [(i, random.randint(0, 25)) for i in range(len(s)) if s[i - 1] == ' ']
-    return applyShifts(s, shifts)[:-1]
+    return applyShift(s, shifts)[:-1]
 
 
 def getStoryString():
@@ -165,9 +165,28 @@ def findBestShift(wordList, text):
     text: string
     returns: 0 <= int < 26
     """
-    ### TODO
-    return "Not yet implemented."  # Remove this comment when you code the function
+    #Create a dictionary to store the shift and number of valid words.
+    shift_dict = {}
+    #For all possible shifts (0 to 25).
+    for i in range(25):
+        # Use applyshift method to decrypte the text.
+        decrypted_text = applyShift(text, i)
+	    # Store decrypted text in a list (consider using string.split function)
+        decrypted_text_list = decrypted_text.split(' ')
+	    # For all possible words in the list, check to see if word is valid (use isWord function).
+        count = 0
+        for w in decrypted_text_list:
+        # Count the number of valid words and store it in dictionary
+            if isWord(wordList, w):
+                count += 1
+        shift_dict[i] = count
 
+    # Use the dictionary, return the shift with the highest number of valid words.
+    max = 0
+    for k in shift_dict:
+        if shift_dict[k] > max:
+            max = k
+    return max
 
 def decryptStory():
     """
@@ -178,23 +197,22 @@ def decryptStory():
 
     returns: string - story in plain text
     """
-    ### TODO.
-    return "Not yet implemented."  # Remove this comment when you code the function
-
+    wordList = loadWords()
+    bestshift = findBestShift(wordList, getStoryString())
+    return applyShift(getStoryString(), bestshift)
 
 #
 # Build data structures used for entire session and run encryption
 #
 
 def main():
-    applyShift('This is a test.', 8)
     # To test findBestShift:
-    #wordList = loadWords()
-    #s = applyShift('Hello, world!', 8)
-    #bestShift = findBestShift(wordList, s)
+    # wordList = loadWords()
+    # s = applyShift('Hello, world!', 8)
+    # bestShift = findBestShift(wordList, s)
     #assert applyShift(s, bestShift) == 'Hello, world!'
     # To test decryptStory, comment the above four lines and uncomment this line:
-    #    decryptStory()
+    decryptStory()
 
 
 if __name__ == '__main__':
