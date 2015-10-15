@@ -40,11 +40,13 @@ def nfruits(dict_of_fruits, pattern):
     for p in pattern_list:
         if p in dict_of_fruits:
             dict_of_fruits[p] -= 1
-            pattern_list.remove(p)
-            for p2 in pattern_list:
-                dict_of_fruits[p2] += 1
-    return dict_of_fruits
+        for f in dict_of_fruits:
+            if f != p and len(pattern_list) != 1:
+                dict_of_fruits[f] += 1
+        pattern_list = pattern_list[1:]
+    return max(dict_of_fruits.values())
+
 
 if __name__ == '__main__':
     # print ndigits(sharp(7)) + 2 *ndigits(sharp(6)) + ndigits(sharp(5)) + ndigits(sharp(4))
-    print nfruits({'A': 1, 'B': 2, 'C': 3}, 'AC')
+    print nfruits({'A': 5, 'B': 7, 'C': 8, 'D': 11, 'E': 4}, 'AAABBBEECAAABBAACCAADDBBAACDCAAABBBAEACCAEADABCB')
