@@ -71,6 +71,36 @@ class SummaryTrigger(WordTrigger):
     def evaluate(self, story):
         return self.isWordIn(story.getSummary())
 
+
+class NotTrigger(Trigger):
+    def __init__(self, trigger):
+        self.trigger = trigger
+
+    def evaluate(self, story):
+        return not self.trigger.evaluate(story)
+
+
+class AndTrigger(Trigger):
+    def __init__(self, trigger, trigger2):
+        self.trigger = trigger
+        self.trigger2 = trigger2
+
+    def evaluate(self, story):
+        return self.trigger.evaluate(story) and self.trigger2.evaluate(story)
+
+
+class OrTrigger(Trigger):
+    def __init__(self, trigger, trigger2):
+        self.trigger = trigger
+        self.trigger2 = trigger2
+
+    def evaluate(self, story):
+        return self.trigger.evaluate(story) or self.trigger2.evaluate(story)
+
+
+
+
+
 if __name__ == '__main__':
     #wt = WordTrigger('soft')
     #test = wt.isWordIn("Soft's the new tsoft pink!")
