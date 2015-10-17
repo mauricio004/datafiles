@@ -98,14 +98,24 @@ class OrTrigger(Trigger):
         return self.trigger.evaluate(story) or self.trigger2.evaluate(story)
 
 
+class PhraseTrigger(Trigger):
+    def __init__(self, phrase):
+        self.phrase = phrase
 
+    def evaluate(self, story):
+        test = self.phrase in story.getTitle() or self.phrase in story.getSubject() or self.phrase in story.getSummary()
+        return test
 
 
 if __name__ == '__main__':
     #wt = WordTrigger('soft')
     #test = wt.isWordIn("Soft's the new tsoft pink!")
     #print(test)
-    news = NewsStory('', "\"Soft!\" he exclaimed as he threw the football", '', '', '')
-    title_triger = TitleTrigger('soft')
-    test = title_triger.evaluate(news)
-    print(test)
+    #news = NewsStory('', "\"Soft!\" he exclaimed as he threw the football", '', '', '')
+    #title_triger = TitleTrigger('soft')
+    #test = title_triger.evaluate(news)
+    pt = PhraseTrigger("New York City")
+    a = NewsStory('', "asfdNew York Cityasfdasdfasdf", '', '', '')
+    b = NewsStory('', '', "asdfasfdNew York Cityasfdasdfasdf", '', '')
+    pt.evaluate(a)
+    #print(pt.evaluate(b))
