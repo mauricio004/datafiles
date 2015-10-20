@@ -181,9 +181,10 @@ def filterStories(stories, triggerlist):
     list_stories = []
     for t in triggerlist:
         for s in stories:
-            if t.evaluate(s):
+            if t.evaluate(s) and s not in list_stories:
                 list_stories.append(s)
     return list_stories
+
 
 #======================
 # Part 4

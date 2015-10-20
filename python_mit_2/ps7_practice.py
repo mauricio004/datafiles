@@ -120,10 +120,9 @@ def filterStories(stories, triggerlist):
     list_stories = []
     for t in triggerlist:
         for s in stories:
-            if t.evaluate(s):
+            if t.evaluate(s) and s not in list_stories:
                 list_stories.append(s)
     return list_stories
-
 
 
 class TrueTrigger:
@@ -149,13 +148,22 @@ if __name__ == '__main__':
     stories = [a, b, c, d]
     fStories = filterStories(stories, triggers)
 
-    print t1.evaluate(a)
-    print t1.evaluate(b)
-    for f in fStories:
-        print f
-        for s in stories:
-           print s
-           print s in fStories
 
 
-    print len(filterStories(stories, triggers))
+    for s in fStories:
+        print s
+    print
+    pt = PhraseTrigger("New York City")
+    a = NewsStory('', "asfdNew York Cityasfdasdfasdf", '', '', '')
+    b = NewsStory('', '', "asdfasfdNew York Cityasfdasdfasdf", '', '')
+    c = NewsStory('', '', '', "asdfasfdNew York Cityasfdasdfasdf", '')
+    noa = NewsStory('', "something something new york city", '', '', '')
+    nob = NewsStory('', '', "something something new york city", '', '')
+    noc = NewsStory('', '', '', "something something new york city", '')
+
+    triggers2 = [pt]
+    stories2 = [a, b, c, noa, nob, noc]
+    fstories2 = filterStories(stories2, triggers2)
+
+    for s2 in fstories2:
+        print s2
