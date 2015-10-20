@@ -125,45 +125,65 @@ def filterStories(stories, triggerlist):
     return list_stories
 
 
-class TrueTrigger:
-    def evaluate(self, story): return True
+def makeTrigger(triggerMap, triggerType, params, name):
+    """
+    Takes in a map of names to trigger instance, the type of trigger to make,
+    and the list of parameters to the constructor, and adds a new trigger
+    to the trigger map dictionary.
 
-class FalseTrigger:
-    def evaluate(self, story): return False
+    triggerMap: dictionary with names as keys (strings) and triggers as values
+    triggerType: string indicating the type of trigger to make (ex: "TITLE")
+    params: list of strings with the inputs to the trigger constructor (ex: ["world"])
+    name: a string representing the name of the new trigger (ex: "t1")
+
+    Modifies triggerMap, adding a new key-value pair for this trigger.
+
+    Returns a new instance of a trigger (ex: TitleTrigger, AndTrigger).
+    """
+    # TODO: Problem 11
+
+
+def readTriggerConfig(filename):
+    """
+    Returns a list of trigger objects
+    that correspond to the rules set
+    in the file filename
+    """
+
+    # Here's some code that we give you
+    # to read in the file and eliminate
+    # blank lines and comments
+    triggerfile = open(filename, "r")
+    all = [line.rstrip() for line in triggerfile.readlines()]
+    lines = []
+    for line in all:
+        if len(line) == 0 or line[0] == '#':
+            continue
+        lines.append(line)
+
+    triggers = []
+    triggerMap = {}
+
+    # Be sure you understand this code - we've written it for you,
+    # but it's code you should be able to write yourself
+    for line in lines:
+
+        linesplit = line.split(" ")
+
+        # Making a new trigger
+        if linesplit[0] != "ADD":
+            trigger = makeTrigger(triggerMap, linesplit[1],
+                                  linesplit[2:], linesplit[0])
+
+        # Add the triggers to the list
+        else:
+            for name in linesplit[1:]:
+                triggers.append(triggerMap[name])
+
+    return triggers
+
 
 
 if __name__ == '__main__':
-    t1 = PhraseTrigger("Neil deGrasse Tyson")
-    t2 = OrTrigger(SummaryTrigger("Mars"), SummaryTrigger("Venus"))
-    a = NewsStory('', 'Planetarium Popular', 'Strangely, children enjoy learning',
-                  'Astrophysicist Neil deGrasse Tyson brings in new visitors to NYC museum', '')
-    b = NewsStory('', 'NASA funding slashed', 'No future visits to Mars',
-                  'Children sad at the loss of future jobs for astronauts', '')
-    c = NewsStory('', 'Rover Visits the Red Planet', 'Curiosity picks up where Spirit left off',
-                  'Findings reveal potential for life on Mars', '')
-    d = NewsStory('', 'Uninhabitable Planets', 'Uranus, Neptune deemed too cold',
-                  'Venus, Jupiter deemed much too toxic','')
-
-    triggers = [t1, t2]
-    stories = [a, b, c, d]
-    fStories = filterStories(stories, triggers)
-
-
-
-    for s in fStories:
-        print s
-    print
-    pt = PhraseTrigger("New York City")
-    a = NewsStory('', "asfdNew York Cityasfdasdfasdf", '', '', '')
-    b = NewsStory('', '', "asdfasfdNew York Cityasfdasdfasdf", '', '')
-    c = NewsStory('', '', '', "asdfasfdNew York Cityasfdasdfasdf", '')
-    noa = NewsStory('', "something something new york city", '', '', '')
-    nob = NewsStory('', '', "something something new york city", '', '')
-    noc = NewsStory('', '', '', "something something new york city", '')
-
-    triggers2 = [pt]
-    stories2 = [a, b, c, noa, nob, noc]
-    fstories2 = filterStories(stories2, triggers2)
-
-    for s2 in fstories2:
-        print s2
+    filename = "c:/Users/mflores1/datafiles/python_mit_2/triggers.txt"
+    readTriggerConfig(filename)

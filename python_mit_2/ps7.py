@@ -220,7 +220,7 @@ def readTriggerConfig(filename):
     # to read in the file and eliminate
     # blank lines and comments
     triggerfile = open(filename, "r")
-    all = [ line.rstrip() for line in triggerfile.readlines() ]
+    all = [line.rstrip() for line in triggerfile.readlines()]
     lines = []
     for line in all:
         if len(line) == 0 or line[0] == '#':
