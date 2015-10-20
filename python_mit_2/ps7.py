@@ -127,6 +127,7 @@ class SummaryTrigger(WordTrigger):
 # Composite Triggers
 # Problems 6-8
 
+
 class NotTrigger(Trigger):
     def __init__(self, trigger):
         self.trigger = trigger
@@ -176,9 +177,13 @@ def filterStories(stories, triggerlist):
 
     Returns: a list of only the stories for which a trigger in triggerlist fires.
     """
-    # TODO: Problem 10
-    # This is a placeholder (we're just returning all the stories, with no filtering) 
-    return stories
+    # This is a placeholder (we're just returning all the stories, with no filtering)
+    list_stories = []
+    for t in triggerlist:
+        for s in stories:
+            if t.evaluate(s):
+                list_stories.append(s)
+    return list_stories
 
 #======================
 # Part 4
