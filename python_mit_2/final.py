@@ -157,6 +157,9 @@ class Frob(object):
     def myName(self):
         return self.name
 
+    def __str__(self):
+        return self.after
+
 
 def insert(atMe, newFrob):
     """
@@ -164,26 +167,44 @@ def insert(atMe, newFrob):
     newFrob:  a Frob with no links 
     This procedure appropriately inserts newFrob into the linked list that atMe is a part of.
     """
-    frobs = []
-    andrew = Frob('andrew')
-    eric = Frob('eric')
-    frobs.append(andrew)
-    frobs.append(eric)
-
-    if atMe not in frobs:
-        frobs.append(atMe)
-
+    # Insert at the end
     if newFrob.name > atMe.name:
-        frobs.append(newFrob)
-
-
+        newFrob.setBefore(atMe.name)
+        atMe.setAfter(newFrob)
+    else:
+        atMe.setBefore(newFrob.name)
+        newFrob.setAfter(atMe.name)
 
 
 if __name__ == '__main__':
+    frobs = []
     eric = Frob('eric')
+    frobs.append(eric)
     andrew = Frob('andrew')
+    frobs.append(andrew)
     ruth = Frob('ruth')
+    frobs.append(ruth)
     fred = Frob('fred')
+    frobs.append(fred)
     martha = Frob('martha')
+    frobs.append(martha)
     boy = Frob('boy')
-    insert(andrew)
+    for f in frobs:
+        print str(f)
+
+    insert(eric, andrew)
+
+
+
+    print "--Eric--"
+    print eric.getBefore()
+    print eric.getAfter()
+    print "--andrew--"
+    print andrew.getBefore()
+    print andrew.getAfter()
+    insert(eric, ruth)
+    print "--ruth--"
+    print ruth.getBefore()
+    print ruth.getAfter()
+
+
