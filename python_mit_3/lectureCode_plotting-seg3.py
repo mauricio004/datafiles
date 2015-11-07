@@ -31,8 +31,6 @@ class MortgagePlots(object):
         pylab.plot(totPd, style, label = self.legend)
 
 
-
-
 class Mortgage(MortgagePlots, object):
     """Abstract class for building different kinds of mortgages"""
     def __init__(self, loan, annRate, months):
@@ -57,10 +55,6 @@ class Mortgage(MortgagePlots, object):
 
     def __str__(self):
         return self.legend
-
-
-
-
 
 
 # fixed-rate mortgage
@@ -97,15 +91,6 @@ class TwoRate(Mortgage):
         Mortgage.makePayment(self)
 
 
-
-
-
-
-
-
-
-
-
 class MortgagePlots(object):
     
     def plotPayments(self, style):
@@ -116,24 +101,6 @@ class MortgagePlots(object):
         for i in range(1, len(self.paid)):
             totPd.append(totPd[-1] + self.paid[i])
         pylab.plot(totPd, style, label = self.legend)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def plotMortgages(morts, amt):
@@ -160,13 +127,6 @@ def plotMortgages(morts, amt):
     pylab.legend(loc = 'best')
 
 
-
-
-
-
-
-
-
 def compareMortgages(amt, years, fixedRate, pts, ptsRate,
                     varRate1, varRate2, varMonths):
     totMonths = years*12
@@ -179,19 +139,6 @@ def compareMortgages(amt, years, fixedRate, pts, ptsRate,
         for mort in morts:
             mort.makePayment()
     plotMortgages(morts, amt)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 compareMortgages(amt=200000, years=30, fixedRate=0.07,
                  pts = 3.25, ptsRate=0.05, varRate1=0.045,

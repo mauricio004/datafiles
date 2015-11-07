@@ -1,3 +1,6 @@
+import pylab
+import  numpy as np
+
 PATH_TO_FILE = 'julyTemps.txt'
 
 
@@ -15,5 +18,14 @@ def loadWords():
     return low, high
 
 
+def producePlot(lowTemps, highTemps):
+    diffTemps = list(np.array(highTemps) - np.array(lowTemps))
+    pylab.plot(range(1, 32), diffTemps)
+    pylab.title( 'Day by Day Ranges in Temperature in Boston in July 2012')
+    pylab.xlabel('Days')
+    pylab.ylabel('Temperature Ranges')
+    pylab.show()
+
+
 if __name__ == '__main__':
-    print loadWords()
+    producePlot(loadWords()[0], loadWords()[1])
