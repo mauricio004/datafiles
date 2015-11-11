@@ -54,14 +54,6 @@ class Field(object):
         return self.drunks[drunk]
 
 
-
-
-
-
-
-
-
-
 import random
 
 
@@ -106,7 +98,7 @@ def drunkTest(numTrials = 20):
         print ' Max =', max(distances), 'Min =', min(distances)
 
 
-
+drunkTest()
 
 ## import pylab
 

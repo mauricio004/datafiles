@@ -25,5 +25,15 @@ def stochasticNumber():
     return random.randrange(9, 21, 2)
 
 
+def test():
+    mylist = []
+    random.seed(0)
+    for i in xrange(random.randint(1, 10)):
+
+        if random.randint(1, 10) > 3:
+            number = random.randint(1, 10)
+            mylist.append(number)
+    print mylist
+
 if __name__ == '__main__':
-    print stochasticNumber()
+    test()
