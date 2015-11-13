@@ -26,9 +26,6 @@ class Location(object):
         return '<' + str(self.x) + ', ' + str(self.y) + '>'
 
 
-
-
-
 class Field(object):
     
     def __init__(self):
@@ -62,7 +59,8 @@ class Drunk(object):
         self.name = name
     def __str__(self):
         return 'This drunk is named ' + self.name
-    
+
+
 class UsualDrunk(Drunk):
     def takeStep(self):
         stepChoices =\
@@ -77,7 +75,6 @@ def walk(f, d, numSteps):
     return(start.distFrom(f.getLoc(d)))
 
 
-
 def simWalks(numSteps, numTrials):
     homer = UsualDrunk('Homer')
     origin = Location(0, 0)
@@ -87,7 +84,6 @@ def simWalks(numSteps, numTrials):
         f.addDrunk(homer, origin)
         distances.append(walk(f, homer, numSteps))
     return distances
-
 
 
 def drunkTest(numTrials = 20):

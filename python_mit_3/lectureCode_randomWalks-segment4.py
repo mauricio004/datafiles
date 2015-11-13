@@ -1,4 +1,4 @@
-
+import pylab
 
 class Location(object):
     
@@ -201,3 +201,4 @@ def drunkTestP(numTrials = 50):
     pylab.show()
 
 
+drunkTestP()
