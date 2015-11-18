@@ -4,8 +4,5 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="python_mit" />
-    <orderEntry type="module" module-name="python_google_2" />
-    <orderEntry type="module" module-name="rp" />
   </component>
 </module>
