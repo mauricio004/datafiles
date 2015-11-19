@@ -1,26 +1,45 @@
+# -*- coding: utf-8 -*-
 import csv
 import re
+import unicodedata
 from bs4 import BeautifulSoup
 
 
-def extractData(filename):
-    """Returns a dictionary with 'CustomerID' and comments for each guest card
+def cleanData(filename):
+    """Returns an string
 
-    filename: .csv file with customer id and email text from prospects
+    filename: Delimited file with text and html.  Convert html to readable format.  Convert unicode to string
     """
-    idDict = {}
-    #with open(filename, "r") as f:
-    #    for line in f:
-    #        print line
-    f = open(filename, 'r')
-    raw = BeautifulSoup(f).get_text()
-    print raw
+    id_dict = {}
+    with open(filename, "rb") as f:
+        raw = BeautifulSoup(f).get_text()
+    raw_text = unicodedata.normalize('NFKD', raw).encode('ascii', 'ignore')
+    return raw_text
+
+
+def readData(rawtxt):
+        """
+        xxx
+        """
+        # customer_id = re.findall(r'CustomerID:(\d+)', rawtxt)
+        #email_text = re.findall('^CustomerID:(.*?)^CustomerID:', rawtxt, re.DOTALL|re.MULTILINE)
+        #email_text = re.findall('CustomerID:(.*?)CustomerID:', rawtxt, re.DOTALL)
+        email_text = re.findall('CustomerID:.*?CustomerID:', rawtxt, re.DOTALL)
+
+        return email_text
 
 if __name__ == '__main__':
-    filename = "C:/Users/mflores1/datafiles/rp/sample.csv"
+    filename = "C:/Users/mflores1/datafiles/rp/sample_test.csv"
     try:
-        extractData(filename)
+        t = cleanData(filename)
     except IOError:
-        print 'Cannot find file or directory'
+        print 'Cannot open file'
+
+    output = readData(t)
+    print output
+    # for o in output:
+    #    print o
 
 
+    # tWrite = open("C:/Users/mflores1/datafiles/rp/t.txt", 'w')
+    # tWrite.write(t)
