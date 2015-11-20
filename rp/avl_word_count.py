@@ -21,24 +21,23 @@ def readData(rawtxt):
         """
         xxx
         """
-        # customer_id = re.findall(r'CustomerID:(\d+)', rawtxt)
-        #email_text = re.findall('^CustomerID:(.*?)^CustomerID:', rawtxt, re.DOTALL|re.MULTILINE)
-        #email_text = re.findall('CustomerID:(.*?)CustomerID:', rawtxt, re.DOTALL)
-        email_text = re.findall('CustomerID:.*?CustomerID:', rawtxt, re.DOTALL)
 
+        # email_text = re.findall(r'CustomerID:(\d+),\s*(.*?)\s*(?=CustomerID:|$)', rawtxt, re.DOTALL)
+        # email_text = re.findall(r'CustomerID:(\d+),(.*?)(?=CustomerID:)', rawtxt, re.DOTALL)
+        email_text = re.findall(r'CustomerID:(\d+).*?(Comments:.*?)(?=CustomerID:)', rawtxt, re.DOTALL)
         return email_text
 
 if __name__ == '__main__':
-    filename = "C:/Users/mflores1/datafiles/rp/sample_test.csv"
+    filename = "C:/Users/mflores1/datafiles/rp/sample.csv"
     try:
         t = cleanData(filename)
     except IOError:
         print 'Cannot open file'
 
     output = readData(t)
-    print output
-    # for o in output:
-    #    print o
+    # print output
+    for o in output:
+        print o
 
 
     # tWrite = open("C:/Users/mflores1/datafiles/rp/t.txt", 'w')
